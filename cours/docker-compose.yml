@@ -1,0 +1,68 @@
+##############################################################################
+# Docker Compose - Environnement de développement PHP / Laravel / BDD
+#
+# Ce fichier va lancer trois conteneurs :
+#   1. app       → votre environnement PHP / Laravel
+#   2. postgres  → base de données PostgreSQL
+#   3. mongodb   → base de données MongoDB
+#
+# Le dossier local "./labs" (à côté de ce fichier) sera partagé dans
+# le conteneur PHP dans "/home/dev/labs".
+##############################################################################
+
+version: "3.9"
+
+services:
+  ##########################################################################
+  # Conteneur principal : PHP / Laravel
+  ##########################################################################
+  app:
+    build: .
+    container_name: univ_php_laravel_env
+    working_dir: /home/dev
+    volumes:
+      - ./labs:/home/dev/labs             # Partage du dossier "labs"
+    tty: true                             # Permet d’interagir avec le terminal
+    depends_on:
+      - univ_postgres
+      - univ_mongodb
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+    ports:
+      - "8000:8000"
+
+ 
+  ##########################################################################
+  # Base de données PostgreSQL
+  ##########################################################################
+  univ_postgres:
+    image: postgres:15
+    container_name: univ_postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: laravel_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  ##########################################################################
+  # Base de données MongoDB
+  ##########################################################################
+  univ_mongodb:
+    image: mongo:7
+    container_name: univ_mongodb_server
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+##########################################################################
+# Définition des volumes persistants pour les bases de données
+##########################################################################
+volumes:
+  pg_data:
+  mongo_data:

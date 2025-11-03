@@ -1,0 +1,103 @@
+##############################################################################
+# Bienvenue dans votre environnement de développement PHP / Laravel / BDD
+#
+# Ce conteneur Docker sera votre environnement de travail tout au long
+# du module. Il contient :
+#   - PHP 8.6 (en ligne de commande)
+#   - Composer (pour gérer les dépendances PHP)
+#   - Tout ce qu’il faut pour exécuter un projet Laravel
+#   - Les extensions et clients nécessaires pour PostgreSQL et MongoDB
+#
+# L’objectif est que vous puissiez coder, tester et exécuter vos
+# applications web sans rien installer sur votre machine.
+# Vous aurez juste à partager votre dossier "projets" avec ce conteneur.
+##############################################################################
+
+# Je pars de l’image officielle PHP 8.3 (version CLI uniquement)
+FROM php:8.3-cli
+
+# Je désactive les prompts interactifs d’APT pour automatiser les installations
+ENV DEBIAN_FRONTEND=noninteractive
+
+##############################################################################
+# Installation des dépendances système
+# Je vais maintenant installer tous les outils nécessaires au développement
+##############################################################################
+RUN apt-get update && apt-get install -y \
+    # Editeur en ligne de commande
+    nano \
+    # Affichage de l'arborescence
+    tree \
+    # Outil de versionnage de code (GitHub, GitLab, etc.)    
+    git \
+    # Permet de décompresser les archives (utile pour Composer)
+    unzip \
+    # Utilitaire pour télécharger des fichiers depuis le web
+    curl \
+    # Permet de créer des fichiers ZIP (nécessaire à Laravel)
+    zip \
+    # Librairie utilisée par PHP pour gérer les fichiers ZIP
+    libzip-dev \
+    # Librairie nécessaire pour la connexion à PostgreSQL
+    libpq-dev \
+    # Librairie pour le chiffrement et les connexions sécurisées (SSL/TLS)
+    libssl-dev \
+    # Outil de configuration pour compiler certaines extensions
+    pkg-config \
+    # Librairie cURL pour les requêtes HTTP (utilisée par Composer et Laravel)
+    libcurl4-openssl-dev \
+    # Librairie XML (utilisée par plusieurs extensions PHP)
+    libxml2-dev \
+    # Permet la vérification de signatures (utile pour certaines installations sécurisées)
+    gnupg \
+    # Autre outil pour télécharger des fichiers
+    wget \
+    # Client PostgreSQL pour interagir avec une base distante
+    postgresql-client \
+    # Nettoyage du cache pour alléger l’image
+    && rm -rf /var/lib/apt/lists/*
+
+##############################################################################
+# Installation de mongosh (MongoDB Shell) via le binaire officiel
+##############################################################################
+# Sur les mac avec apple silicon il faut remplacer "amd64" par "arm64"
+# Pour les autres : https://www.mongodb.com/try/download/shell
+RUN wget -q https://downloads.mongodb.com/compass/mongodb-mongosh_1.10.6_amd64.deb \
+    && dpkg -i mongodb-mongosh_1.10.6_amd64.deb \
+    && apt-get install -f -y \
+    && rm mongodb-mongosh_1.10.6_amd64.deb
+
+##############################################################################
+# Installation des extensions PHP nécessaires à Laravel
+##############################################################################
+    # Extensions PHP pour PostgreSQL et gestion des archives ZIP
+RUN docker-php-ext-install pdo pdo_pgsql pgsql zip \
+    # Installation de l’extension MongoDB depuis PECL
+    && pecl install mongodb \
+    # Activation de l’extension MongoDB
+    && docker-php-ext-enable mongodb
+
+##############################################################################
+# Installation de Composer (le gestionnaire de dépendances PHP)
+##############################################################################
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+##############################################################################
+# Création du dossier utilisateur et configuration du dossier de travail
+##############################################################################
+RUN useradd -m dev
+
+##############################################################################
+# Dossier de travail
+##############################################################################
+WORKDIR /labs
+
+##############################################################################
+# Petit message d’accueil quand vous entrez dans le conteneur
+##############################################################################
+RUN echo 'Bienvenue dans le conteneur PHP 8.6 (Laravel / MongoDB / PostgreSQL)' > /etc/motd
+
+##############################################################################
+# 🧩 Commande par défaut : ouverture d’un terminal Bash
+##############################################################################
+CMD ["/bin/bash"]

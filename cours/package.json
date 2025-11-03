@@ -1,0 +1,15 @@
+{
+    "name": "php_env_dev",
+    "scripts": {
+        "build": "docker compose up --build -d",
+        "start": "docker start univ_postgres_db univ_mongodb_server univ_php_laravel_env",
+        "stop:osx": "docker ps -a --format '{{.Names}}' | grep '^univ_' | xargs -r docker stop",
+        "stop:win": "docker ps -a --format \"{{.Names}}\" | ForEach-Object { if ($_ -like 'univ_*') { docker stop $_ } }",
+        "list": "docker ps -a",
+        "shell:root": "docker exec -it univ_php_laravel_env bash",
+        "shell:dev": "docker exec -it -u dev univ_php_laravel_env bash",
+        "db:mongo": "docker exec -it univ_mongodb_server mongosh",
+        "db:postgres": "docker exec -it univ_postgres_db psql -U username -d postgres"
+    },
+    "author": "Adam SOUALHI"
+}

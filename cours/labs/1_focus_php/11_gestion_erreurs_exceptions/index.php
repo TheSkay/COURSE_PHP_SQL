@@ -1,0 +1,16 @@
+<?php
+// Exemple de gestion des erreurs et exceptions
+
+function division($a, $b) {
+    if ($b == 0) {
+        throw new Exception("Division par zéro impossible !");
+    }
+    return $a / $b;
+}
+
+try {
+    echo division(10, 2) . "\n"; // 5
+    echo division(10, 0) . "\n"; // déclenche une exception
+} catch (Exception $e) {
+    echo "Erreur : " . $e->getMessage() . "\n";
+}
