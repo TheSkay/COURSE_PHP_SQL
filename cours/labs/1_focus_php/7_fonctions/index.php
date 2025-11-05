@@ -20,7 +20,7 @@ function addition_all1() {
 }
 
 // avec le splat operator ... (PHP 5.6+)
-function addition_all2(...$args) {
+function addition_all2($a, ...$args) {
     return array_sum($args);
 }
 

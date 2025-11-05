@@ -1,0 +1,11 @@
+{
+    "name": "root/14_db_mongodb",
+    "autoload": {
+        "psr-4": {
+            "Root\\14DbMongodb\\": "src/"
+        }
+    },
+    "require": {
+        "mongodb/mongodb": "^2.1"
+    }
+}

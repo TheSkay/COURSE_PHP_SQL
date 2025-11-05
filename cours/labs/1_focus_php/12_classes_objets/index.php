@@ -15,6 +15,14 @@ class Etudiant {
     public function sePresenter() {
         echo "Bonjour, je m'appelle $this->nom et j'ai $this->age ans.\n";
     }
+
+    public function setName($nom){
+        if($nom === "michel") {
+            $this->nom = "richard";
+        }
+        else 
+            $this->nom = $nom ;
+    }
 }
 
 // Classe qui hérite de Etudiant
@@ -29,14 +37,14 @@ class EtudiantInternational extends Etudiant {
 
     // Méthode : surcharge de sePresenter pour inclure le pays
     public function sePresenter() {
-        // parent::sePresenter(); // Appelle la présentation de base
+        parent::sePresenter(); // Appelle la présentation de base
         echo "Bonjour, je m'appelle $this->nom, j'ai $this->age ans et je viens de $this->pays." . PHP_EOL;
     }
 }
 
 // Création d'objets
-$etudiant1 = new Etudiant("Alice", 25);
-$etudiant1->sePresenter();
+// $etudiant1 = new Etudiant("Alice", 25);
+// $etudiant1->sePresenter();
 
 $etudiant2 = new EtudiantInternational("Bob", 22, "Canada");
 $etudiant2->sePresenter();

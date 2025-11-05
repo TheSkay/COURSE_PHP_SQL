@@ -62,10 +62,10 @@ RUN apt-get update && apt-get install -y \
 ##############################################################################
 # Sur les mac avec apple silicon il faut remplacer "amd64" par "arm64"
 # Pour les autres : https://www.mongodb.com/try/download/shell
-RUN wget -q https://downloads.mongodb.com/compass/mongodb-mongosh_1.10.6_amd64.deb \
-    && dpkg -i mongodb-mongosh_1.10.6_amd64.deb \
+RUN wget -q https://downloads.mongodb.com/compass/mongodb-mongosh_1.10.6_arm64.deb \
+    && dpkg -i mongodb-mongosh_1.10.6_arm64.deb \
     && apt-get install -f -y \
-    && rm mongodb-mongosh_1.10.6_amd64.deb
+    && rm mongodb-mongosh_1.10.6_arm64.deb
 
 ##############################################################################
 # Installation des extensions PHP nécessaires à Laravel

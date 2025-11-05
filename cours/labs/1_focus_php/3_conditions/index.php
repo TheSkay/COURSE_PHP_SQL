@@ -1,7 +1,7 @@
 <?php
 // Exemple d'utilisation des conditions if, else, elseif
 
-$note = 15;
+$note = 16.5;
 
 // Condition simple
 if ($note >= 10) {

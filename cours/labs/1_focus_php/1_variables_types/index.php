@@ -8,8 +8,8 @@ $taille = 1.68;              // float
 $estEtudiant = true;         // boolean
 
 // Affichage des variables
-echo "Nom : " . $nom . "\n";
-echo "Age : " . $age . "\n";
+echo "Nom : $nom\n";
+echo "Age : " . $age . PHP_EOL;
 echo "Taille : " . $taille . " m\n";
 echo "Est étudiant : " . ($estEtudiant ? "Oui" : "Non") . "\n";
 
