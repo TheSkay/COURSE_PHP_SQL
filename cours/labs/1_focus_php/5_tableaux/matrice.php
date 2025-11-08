@@ -8,27 +8,27 @@ $matrice = [
 ];
 
 // Affichage de la matrice ligne par ligne
-// echo "Affichage de la matrice :\n";
-// for ($i = 0; $i < count($matrice); $i++) {
-//     for ($j = 0; $j < count($matrice[$i]); $j++) {
-//         $valeur = $matrice[$i][$j];
-//         echo $valeur . " "; // Affiche chaque élément séparé par un espace
-//     }
-//     echo PHP_EOL ; // Nouvelle ligne après chaque ligne de la matrice
-// }
+echo "Affichage de la matrice :\n";
+for ($i = 0; $i < count($matrice); $i++) {
+    for ($j = 0; $j < count($matrice[$i]); $j++) {
+        $valeur = $matrice[$i][$j];
+        echo $valeur . " "; // Affiche chaque élément séparé par un espace
+    }
+    echo PHP_EOL ; // Nouvelle ligne après chaque ligne de la matrice
+}
 
 // Somme de tous les éléments
 $sommeTotal = 0;
 foreach ($matrice as $ligne) {
     foreach ($ligne as $case) {
-        // $sommetotal = $sommeTotal + $case;
-        // echo "Variable : $case -> " . gettype($case) . PHP_EOL ;
+        $sommetotal = $sommeTotal + $case;
+        echo "Variable : $case -> " . gettype($case) . PHP_EOL ;
         if( gettype($case) == "integer" || gettype($case) == "double" ){
-            // if( ($case%2) == 0 ){
+            if( ($case%2) == 0 ){
                 $sommeTotal += $case;
-            // } else {
-                // $sommeTotal -= $case;
-            // }
+            } else {
+                $sommeTotal -= $case;
+            }
         }
     }
 }

@@ -12,7 +12,8 @@ $etudiant = [
     "nom" => "Alice",
     "age" => 25,
     "filiere" => "Informatique",
-    "tension" => 12
+    "tension" => 12,
+    97 => "Département" // Mauvaise idée...
 ];
 
 echo "Nom : " . $etudiant["nom"] . "\n";

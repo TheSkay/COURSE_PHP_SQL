@@ -9,8 +9,8 @@ function division($a, $b) {
 }
 
 try {
-    echo division(10, 0) . "\n"; // déclenche une exception
     echo division(10, 2) . "\n"; // 5
+    echo division(10, 0) . "\n"; // déclenche une exception
 }
 catch( DivisionByZeroError $e ){
     echo "Erreur native" . PHP_EOL;

@@ -24,6 +24,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Je vais maintenant installer tous les outils nécessaires au développement
 ##############################################################################
 RUN apt-get update && apt-get install -y \
+    npm \
+    nodejs \
     # Editeur en ligne de commande
     nano \
     # Affichage de l'arborescence
