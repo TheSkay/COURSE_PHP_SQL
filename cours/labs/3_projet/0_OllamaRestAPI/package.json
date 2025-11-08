@@ -1,0 +1,14 @@
+{
+    "name": "ollama-rest-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "Adam SOUALHI",
+    "description": "Small Ollama Rest API Proxy",
+    "dependencies": {
+        "express": "5.1.0",
+        "node-pty": "1.0.0"
+    }
+}
