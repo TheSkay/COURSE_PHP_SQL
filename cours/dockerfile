@@ -106,6 +106,6 @@ WORKDIR /labs
 RUN echo 'Bienvenue dans le conteneur PHP 8.3 du cours' > /etc/motd
 
 ##############################################################################
-# 🧩 Commande par défaut : ouverture d’un terminal Bash
+# Commande par défaut : ouverture d’un terminal Bash
 ##############################################################################
 CMD ["/bin/bash"]

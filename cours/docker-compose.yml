@@ -28,7 +28,6 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports:
       - "8000:8000" # Service API Rest PHP (Back-end)
-      - "3000:3000" # Service API Rest Node.JS IA
       - "4000:4000" # Port en supplément n°1
       - "5000:5000" # Port en supplément n°2
       - "6000:6000" # Port en supplément n°3
