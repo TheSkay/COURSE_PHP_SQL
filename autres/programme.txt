@@ -1,0 +1,28 @@
+Lundi :
+- 14h00 à 18h00 :
+    - Présentation des nouveaux et de leurs parcours
+    - Les bases du langage PHP (CLI, variables, conditions, boucles, fonctions, classes et héritages, ...) ;
+    - Composer : le gestionnaire PHP des dépendances
+    - Construction d'un site internet en PHP ? Démonstration et projet pratique.
+
+Mardi :
+- Jour férié ! Mais profitez en pour regarder les ressources Youtube.
+
+Jeudi :
+- 09h00 à 12h00 :
+    - Base de données en PHP (PDO) : SQL (PostgreSQL) & NoSQL (MongoDB)
+    - Présentation de deux frameworks : Laravel & Slim Framework
+- 13h00 à 17h00 :
+    - Introduction à l'intelligence artificielle : Modèles, GPU Run, etc.
+    - Architecture matériel et intelligence artificielle
+    - Présentation de Ollama et des différents modèles d'IA proposés
+    - Présentation de l'API Home Made TTY Node.JS d'interfaçage avec Ollama
+    - Présentation du projet en groupe du vendredi
+
+Vendredi :
+- 09h00 à 12h00 :
+    - Appels réseaux en PHP
+    - Intégration d'API
+- 13h00 à 17h00 :
+    - Évaluation individuelle PHP & SQL
+    - Projet en groupe (Évaluation)

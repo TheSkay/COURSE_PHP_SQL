@@ -1,0 +1,3 @@
+PHP :
+- PHP Tutorial for Beginners - PHP Crash Course (2025) : https://youtu.be/ny4-hGENWVk
+- un CRUD PHP en 2 heures ! : https://youtu.be/wAn-bPuQaYg
