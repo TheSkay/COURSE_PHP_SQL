@@ -10,15 +10,13 @@
 # le conteneur PHP dans "/home/dev/labs".
 ##############################################################################
 
-version: "3.9"
-
 services:
   ##########################################################################
   # Conteneur principal : PHP / Laravel
   ##########################################################################
   app:
     build: .
-    container_name: univ_php_laravel_env
+    container_name: univ_php_env
     working_dir: /home/dev
     volumes:
       - ./labs:/home/dev/labs             # Partage du dossier "labs"
@@ -29,11 +27,12 @@ services:
     environment:
       - DEBIAN_FRONTEND=noninteractive
     ports:
-      - "8000:8000"
-      - "3000:3000"
-      - "4000:4000"
+      - "8000:8000" # Service API Rest PHP (Back-end)
+      - "3000:3000" # Service API Rest Node.JS IA
+      - "4000:4000" # Port en supplément n°1
+      - "5000:5000" # Port en supplément n°2
+      - "6000:6000" # Port en supplément n°3
 
- 
   ##########################################################################
   # Base de données PostgreSQL
   ##########################################################################
@@ -44,7 +43,7 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: laravel_db
+      POSTGRES_DB: univ_sql_db
     ports:
       - "5432:5432"
     volumes:
@@ -55,7 +54,7 @@ services:
   ##########################################################################
   univ_mongodb:
     image: mongo:7
-    container_name: univ_mongodb_server
+    container_name: univ_nosql_db
     restart: unless-stopped
     ports:
       - "27017:27017"

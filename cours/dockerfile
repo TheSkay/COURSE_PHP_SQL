@@ -24,6 +24,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Je vais maintenant installer tous les outils nécessaires au développement
 ##############################################################################
 RUN apt-get update && apt-get install -y \
+    # Node.JS et le gestionnaire de paquet pnpm + npm
     npm \
     nodejs \
     # Editeur en ligne de commande
@@ -58,6 +59,11 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     # Nettoyage du cache pour alléger l’image
     && rm -rf /var/lib/apt/lists/*
+
+##############################################################################
+# Installation de PNPM
+##############################################################################
+RUN npm install -g pnpm
 
 ##############################################################################
 # Installation de mongosh (MongoDB Shell) via le binaire officiel
@@ -97,7 +103,7 @@ WORKDIR /labs
 ##############################################################################
 # Petit message d’accueil quand vous entrez dans le conteneur
 ##############################################################################
-RUN echo 'Bienvenue dans le conteneur PHP 8.6 (Laravel / MongoDB / PostgreSQL)' > /etc/motd
+RUN echo 'Bienvenue dans le conteneur PHP 8.3 du cours' > /etc/motd
 
 ##############################################################################
 # 🧩 Commande par défaut : ouverture d’un terminal Bash
