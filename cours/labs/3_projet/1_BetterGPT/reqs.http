@@ -1,0 +1,27 @@
+### Affichage des modèles disponibles
+GET http://localhost:8000/api/models 
+
+### Création d'un chat avec un modèle
+PUT http://localhost:8000/api/conversations 
+Content-Type: application/json; charset=utf-8
+
+{
+    "model": "llama3:8b"
+}
+
+### Récupération de tous les chats ouverts
+GET http://localhost:8000/api/conversations
+
+### Envoi d'un message dans un chat
+POST http://localhost:8000/api/conversations/0/message
+Content-Type: application/json; charset=utf-8
+
+{
+    "message": "Hello world in javascript, rust and python"
+}
+
+### Suppression d'un chat
+DELETE http://localhost:8000/api/conversations/0
+
+### Test API 404
+GET http://localhost:8000/api/test

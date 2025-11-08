@@ -4,6 +4,7 @@ Lundi :
     - Les bases du langage PHP (CLI, variables, conditions, boucles, fonctions, classes et héritages, ...) ;
     - Composer : le gestionnaire PHP des dépendances
     - Construction d'un site internet en PHP ? Démonstration et projet pratique.
+    - Comment utiliser le templating : Twig
 
 Mardi :
 - Jour férié ! Mais profitez en pour regarder les ressources Youtube.
