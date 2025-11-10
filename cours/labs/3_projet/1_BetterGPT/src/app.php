@@ -28,23 +28,24 @@ elseif (str_starts_with($uri, '/public') && $method === 'GET') {
         // Déterminer le type MIME de manière plus fiable
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
         $mimeTypes = [
-            'html' => 'text/html',
-            'css'  => 'text/css',
-            'js'   => 'application/javascript',
-            'json' => 'application/json',
+            'html' => 'text/html; charset=utf-8',
+            'css'  => 'text/css; charset=utf-8',
+            'js'   => 'application/javascript; charset=utf-8',
+            'json' => 'application/json; charset=utf-8',
             'png'  => 'image/png',
             'jpg'  => 'image/jpeg',
             'jpeg' => 'image/jpeg',
             'gif'  => 'image/gif',
             'svg'  => 'image/svg+xml',
             'ico'  => 'image/x-icon',
-            'txt'  => 'text/plain',
+            'txt'  => 'text/plain; charset=utf-8',
         ];
 
         $mimeType = $mimeTypes[$extension] ?? mime_content_type($filePath) ?? 'application/octet-stream';
-        header('Content-Type: ' . $mimeType);
+        header('Content-Type: ' . $mimeType );
         header('Content-Disposition: inline'); // Afficher, pas télécharger
-        header('Cache-Control: public, max-age=86400'); // optionnel, pour la perf
+        // header('Cache-Control: public, max-age=86400'); // optionnel, pour la perf
+        header('Cache-Control: public, max-age=2');
 
         readfile($filePath);
         
@@ -158,9 +159,9 @@ elseif (str_starts_with($uri, '/api') ) {
             }
 
             $userPrompt = trim($data['message']);
-            $fullPrompt = $GLOBALS['GLOBAL_SYSTEM_PROMPT'] . "\n" . $userPrompt;
+            // $fullPrompt = $GLOBALS['GLOBAL_SYSTEM_PROMPT'] . "\n" . $userPrompt;
 
-            $r = call_node_api("conversations/{$m[1]}/message", 'POST', ['message' => $fullPrompt]);
+            $r = call_node_api("conversations/{$m[1]}/message", 'POST', ['message' => $userPrompt]);
             http_response_code($r['status']);
 
             echo json_encode([
