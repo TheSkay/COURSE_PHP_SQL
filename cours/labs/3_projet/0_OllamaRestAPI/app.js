@@ -29,6 +29,9 @@ function cleanText(input) {
 
     // Supprime le prompt final de Ollama
     text = text.replace(/>>> Send a message.*$/s, '').trim();
+
+    // Supprime les loaders
+    text = text.replace(/[⠙⠹⠸⠋⠼⠼⠦⠧⠧⠏⠼⠼⠦⠦⠇⠇⠏⠴⠦⠦⠇⠇⠴⠴⠦⠧⠏⠏⠼⠴⠦⠇⠇⠏⠴⠴⠧⠧⠏⠏⠴⠴⠦⠇⠇⠼]/g, '').trim();
     
     return text;
 }
@@ -57,8 +60,9 @@ app.get('/api/models', (_, res) => {
 });
 
 // Endpoint pour créer une conversation avec choix de modèle
-app.put('/api/conversations', (req, res) => {
+app.put('/api/conversations', async (req, res) => {
     const { model } = req.body;
+    console.log('req.body', req.body)
     if (!model) return res.status(400).json({ error: 'Model is required' });
 
     if (conversations.length >= MAX_CONVERSATIONS) {
@@ -86,6 +90,10 @@ app.put('/api/conversations', (req, res) => {
             conv.buffer = cleanText(conv.buffer);
         }
     });
+
+    // await sleep(10);
+
+    // conv.buffer = ''; // Pour éviter les loaders ascii
 
     res.status(201).json({ id, model });
 });
@@ -135,9 +143,13 @@ app.post('/api/conversations/:id/message', async (req, res) => {
         process.stdout.write('.');
     } while( conv.busy );
 
-    console.log('OK')
+    console.log('OK');
 
-    res.json({ reply: cleanText(conv.buffer) });
+    const reply = cleanText(conv.buffer).split(`\n`).slice(1).join('\n');
+
+    console.log(`Question : "${message}"\n\nRéponse : ${reply}`)
+
+    res.json({ reply });
 });
 
 // Démarrage du serveur
