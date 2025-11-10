@@ -1,366 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interface Chat</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh;
-    display: flex;
-    overflow: hidden;
-  }
-
-  /* Sidebar gauche */
-  .sidebar {
-    width: 250px;
-    background-color: #1f1f1f;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  .sidebar h2 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-  }
-
-  .new-chat-btn {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .new-chat-btn:hover {
-    background-color: #0056b3;
-  }
-
-  .chat-list {
-    flex: 1;
-    overflow-y: auto;
-  }
-
-  .chat-item {
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .chat-item:hover, .chat-item.active {
-    background-color: #333;
-  }
-
-  .delete-chat-btn {
-    background: transparent;
-    border: none;
-    color: #ff4d4f;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .delete-chat-btn:hover {
-    color: #ff0000;
-  }
-
-  /* Zone chat */
-  .chat-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #f5f5f5;
-  }
-
-  .chat-header {
-    padding: 15px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    font-weight: bold;
-  }
-
-  .messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-  }
-
-  .message {
-    margin-bottom: 10px;
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 8px;
-    clear: both;
-  }
-
-  .message.user {
-    background-color: #007bff;
-    color: white;
-    float: right;
-  }
-
-  .message.bot {
-    background-color: #e4e4e4;
-    color: black;
-    float: left;
-  }
-
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    background-color: #fff;
-  }
-
-  .chat-input input {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .chat-input button {
-    margin-left: 10px;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-
-  .chat-input button:hover {
-    background-color: #0056b3;
-  }
-
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    min-width: 300px;
-    position: relative;
-  }
-
-  .modal-content h3 {
-    margin-top: 0;
-  }
-
-  .modal-content select, .modal-content button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-  }
-
-  .close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterGPT</title>
+    <link rel="stylesheet" href="/public/style.css" />
 </head>
+
 <body>
 
-<div class="sidebar">
-  <h2>Mes Chats</h2>
-  <button class="new-chat-btn" id="new-chat-btn">Nouvelle conversation</button>
-  <div class="chat-list" id="chat-list">
-    <div class="chat-item active" data-chat="Chat 1">
-      <span class="chat-name">Chat 1</span>
-      <button class="delete-chat-btn">&times;</button>
+    <div class="sidebar">
+        <h2>BetterGPT</h2>
+        <button class="new-chat-btn" id="new-chat-btn">Nouvelle conversation</button>
+        <div class="chat-list" id="chat-list">
+            <!-- <div class="chat-item active" data-chat="Chat 1">
+                <span class="chat-name">Chat 1</span>
+                <button class="delete-chat-btn">&times;</button>
+            </div>
+            <div class="chat-item" data-chat="Chat 2">
+                <span class="chat-name">Chat 2</span>
+                <button class="delete-chat-btn">&times;</button>
+            </div>
+            <div class="chat-item" data-chat="Chat 3">
+                <span class="chat-name">Chat 3</span>
+                <button class="delete-chat-btn">&times;</button>
+            </div> -->
+        </div>
     </div>
-    <div class="chat-item" data-chat="Chat 2">
-      <span class="chat-name">Chat 2</span>
-      <button class="delete-chat-btn">&times;</button>
+
+    <div class="chat-container">
+        <div class="chat-header" id="chat-header">Chat 1</div>
+        <div class="messages" id="messages">
+            <div class="message bot">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Écrire un message..." />
+            <button id="send-btn">Envoyer</button>
+        </div>
     </div>
-    <div class="chat-item" data-chat="Chat 3">
-      <span class="chat-name">Chat 3</span>
-      <button class="delete-chat-btn">&times;</button>
+
+    <!-- Modal -->
+    <div class="modal" id="new-chat-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h3>Nouvelle Conversation</h3>
+            <label for="model-select">Choisir le modèle :</label>
+            <select id="model-select">
+            </select>
+            <button id="start-chat-btn">Démarrer</button>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="chat-container">
-  <div class="chat-header" id="chat-header">Chat 1</div>
-  <div class="messages" id="messages">
-    <div class="message bot">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
-  </div>
-  <div class="chat-input">
-    <input type="text" id="message-input" placeholder="Écrire un message..." />
-    <button id="send-btn">Envoyer</button>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal" id="new-chat-modal">
-  <div class="modal-content">
-    <span class="close-modal" id="close-modal">&times;</span>
-    <h3>Nouvelle Conversation</h3>
-    <label for="model-select">Choisir le modèle :</label>
-    <select id="model-select">
-      <option value="GPT-3.5">GPT-3.5</option>
-      <option value="GPT-4">GPT-4</option>
-      <option value="Custom">Custom</option>
-    </select>
-    <button id="start-chat-btn">Démarrer</button>
-  </div>
-</div>
-
-<script>
-  const chatList = document.getElementById('chat-list');
-  const chatHeader = document.getElementById('chat-header');
-  const messages = document.getElementById('messages');
-  const input = document.getElementById('message-input');
-  const sendBtn = document.getElementById('send-btn');
-
-  const modal = document.getElementById('new-chat-modal');
-  const newChatBtn = document.getElementById('new-chat-btn');
-  const closeModal = document.getElementById('close-modal');
-  const startChatBtn = document.getElementById('start-chat-btn');
-  const modelSelect = document.getElementById('model-select');
-
-  let chatData = {
-    "Chat 1": [{ role: "bot", text: "Bonjour ! Comment puis-je vous aider aujourd'hui ?" }],
-    "Chat 2": [{ role: "bot", text: "Bienvenue dans Chat 2." }],
-    "Chat 3": [{ role: "bot", text: "Bienvenue dans Chat 3." }]
-  };
-
-  let currentChat = "Chat 1";
-
-  function renderMessages(chatName) {
-    messages.innerHTML = "";
-    if (!chatData[chatName]) return;
-    chatData[chatName].forEach(msg => {
-      const div = document.createElement('div');
-      div.classList.add('message', msg.role);
-      div.textContent = msg.text;
-      messages.appendChild(div);
-    });
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function setActiveChat(chatName) {
-    currentChat = chatName;
-    document.querySelectorAll('.chat-item').forEach(ci => ci.classList.remove('active'));
-    const item = Array.from(document.querySelectorAll('.chat-item')).find(ci => ci.dataset.chat === chatName);
-    if (item) item.classList.add('active');
-    chatHeader.textContent = chatName;
-    renderMessages(chatName);
-  }
-
-  function deleteChat(chatName, chatElement) {
-    delete chatData[chatName];
-    chatElement.remove();
-    if (currentChat === chatName) {
-      const firstChat = document.querySelector('.chat-item');
-      if (firstChat) setActiveChat(firstChat.dataset.chat);
-      else {
-        chatHeader.textContent = "";
-        messages.innerHTML = "";
-        currentChat = null;
-      }
-    }
-  }
-
-  function attachDeleteButtons() {
-    document.querySelectorAll('.delete-chat-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const chatElement = e.target.parentElement;
-        const chatName = chatElement.dataset.chat;
-        deleteChat(chatName, chatElement);
-      });
-    });
-  }
-
-  // Initial setup
-  attachDeleteButtons();
-
-  // Click sur un chat existant
-  chatList.addEventListener('click', e => {
-    const item = e.target.closest('.chat-item');
-    if (item) setActiveChat(item.dataset.chat);
-  });
-
-  // Envoyer message
-  sendBtn.addEventListener('click', () => {
-    const text = input.value.trim();
-    if (!text || !currentChat) return;
-    chatData[currentChat].push({ role: "user", text });
-    renderMessages(currentChat);
-    input.value = "";
-    setTimeout(() => {
-      chatData[currentChat].push({ role: "bot", text: "Réponse automatique : " + text });
-      renderMessages(currentChat);
-    }, 500);
-  });
-
-  input.addEventListener('keypress', e => {
-    if (e.key === 'Enter') sendBtn.click();
-  });
-
-  // Nouvelle conversation
-  newChatBtn.addEventListener('click', () => modal.style.display = 'flex');
-  closeModal.addEventListener('click', () => modal.style.display = 'none');
-  window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
-
-  startChatBtn.addEventListener('click', () => {
-    const model = modelSelect.value;
-    const newChatName = "Chat " + (Object.keys(chatData).length + 1) + " (" + model + ")";
-    chatData[newChatName] = [{ role: "bot", text: `Bienvenue dans ${newChatName} avec le modèle ${model}.` }];
-
-    const newItem = document.createElement('div');
-    newItem.classList.add('chat-item');
-    newItem.dataset.chat = newChatName;
-
-    const nameSpan = document.createElement('span');
-    nameSpan.classList.add('chat-name');
-    nameSpan.textContent = newChatName;
-
-    const delBtn = document.createElement('button');
-    delBtn.classList.add('delete-chat-btn');
-    delBtn.innerHTML = '&times;';
-    delBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      deleteChat(newChatName, newItem);
-    });
-
-    newItem.appendChild(nameSpan);
-    newItem.appendChild(delBtn);
-    chatList.appendChild(newItem);
-
-    setActiveChat(newChatName);
-    modal.style.display = 'none';
-  });
-
-  // Initial render
-  renderMessages(currentChat);
-</script>
+    <script src="/public/marked.min.js"></script>
+    <script src="/public/script.js"></script>
+    <script src="/public/api.js" defer></script>
 
 </body>
+
 </html>
